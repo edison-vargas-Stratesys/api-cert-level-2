@@ -1,0 +1,70 @@
+#%RAML 1.0
+title: Commodity Prices API
+version: v2
+baseUri: https://api.example.com/v2
+
+uses:
+  lib: commodities-lib.raml
+
+types:
+  Commodity:
+    type: object
+    properties:
+      id: string
+      name: string
+      currentPrice: number
+      currency: lib.Currency
+      unit: string
+      lastUpdated: datetime
+      test: string
+
+  CommodityPage:
+    type: object
+    properties:
+      items: Commodity[]
+      pagination: lib.Pagination
+
+  PriceHistoryEntry:
+    type: object
+    properties:
+      date: datetime
+      price: number
+
+/commodities:
+  get:
+    description: Returns commodities, paginated in v2.
+    queryParameters:
+      page:
+        type: integer
+        default: 1
+      pageSize:
+        type: integer
+        default: 20
+        maximum: 100
+    responses:
+      200:
+        body:
+          application/json:
+            type: CommodityPage
+  /{commodityId}:
+    uriParameters:
+      commodityId:
+        type: string
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: Commodity
+        404:
+          body:
+            application/json:
+              type: lib.ErrorResponse
+    /history:
+      get:
+        description: Returns price history for one commodity.
+        responses:
+          200:
+            body:
+              application/json:
+                type: PriceHistoryEntry[]

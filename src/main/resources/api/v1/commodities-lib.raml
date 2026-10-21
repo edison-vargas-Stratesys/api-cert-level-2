@@ -1,0 +1,16 @@
+#%RAML 1.0 Library
+types:
+  Currency:
+    type: string
+    enum: [USD, EUR, GBP]
+  Pagination:
+    type: object
+    properties:
+      page: integer
+      pageSize: integer
+      totalItems: integer
+  ErrorResponse:
+    type: object
+    properties:
+      code: string
+      message: string

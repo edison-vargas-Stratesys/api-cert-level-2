@@ -1,0 +1,39 @@
+#%RAML 1.0
+title: api-cert-level-2
+version: v1
+baseUri: https://api.example.com/v1
+
+uses:
+  lib: commodities-lib.raml
+
+types:
+  Commodity:
+    type: object
+    properties:
+      id: string
+      name: string
+      price: number          # v1 uses "price"
+      lastUpdated: datetime
+
+/commodities:
+  get:
+    description: Returns all commodities. No pagination in v1.
+    responses:
+      200:
+        body:
+          application/json:
+            type: Commodity[]
+  /{commodityId}:
+    uriParameters:
+      commodityId:
+        type: string
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: Commodity
+        404:
+          body:
+            application/json:
+              type: lib.ErrorResponse
