@@ -1,0 +1,75 @@
+{
+  "basicConstraints": 42,
+  "criticalExtensionOIDs": [
+    "molestie",
+    "dui",
+    "dolor"
+  ],
+  "extendedKeyUsage": [
+    "nisi",
+    "erat"
+  ],
+  "extensions": [
+    {
+      "criticality": true,
+      "oid": "Fusce"
+    }
+  ],
+  "issuerAlternativeNames": [
+    {
+      "name": "Andi",
+      "type": 48
+    }
+  ],
+  "issuerDN": {
+    "commonName": "ac",
+    "name": "Ana"
+  },
+  "issuerUniqueID": [
+    true,
+    true,
+    false
+  ],
+  "issuerX500Principal": {
+    "name": "Alaina"
+  },
+  "keyUsage": [
+    false,
+    true
+  ],
+  "name": "Adrienne",
+  "nonCriticalExtensionOIDs": [
+    "Lorem",
+    "mi",
+    "dolor"
+  ],
+  "notAfter": "2026-04-26",
+  "notBefore": "2024-03-07",
+  "publicKey": {
+    "algorithm": "In",
+    "modulus": 62,
+    "params": 11,
+    "publicKey": "sed"
+  },
+  "serialNumber": 80,
+  "serialNumberObject": {
+    "serialNumber": 18
+  },
+  "sigAlgName": "sodales",
+  "sigAlgOID": "consectetur",
+  "subjectAlternativeNames": [
+    {
+      "name": "Aldo",
+      "type": 22
+    }
+  ],
+  "subjectDN": {
+    "commonName": "Lorem",
+    "name": "Connie"
+  },
+  "subjectX500Principal": {
+    "name": "Alina"
+  },
+  "type": "convallis",
+  "version": 83
+}

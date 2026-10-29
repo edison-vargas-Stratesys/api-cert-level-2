@@ -1,0 +1,75 @@
+{
+  "basicConstraints": 32,
+  "criticalExtensionOIDs": [
+    "tempor",
+    "lectus"
+  ],
+  "extendedKeyUsage": [
+    "justo",
+    "Nunc"
+  ],
+  "extensions": [
+    {
+      "criticality": false,
+      "oid": "lectus"
+    }
+  ],
+  "issuerAlternativeNames": [
+    {
+      "name": "Altagracia",
+      "type": 24
+    }
+  ],
+  "issuerDN": {
+    "commonName": "semper",
+    "name": "Analisa"
+  },
+  "issuerUniqueID": [
+    false,
+    false,
+    true
+  ],
+  "issuerX500Principal": {
+    "name": "Allison"
+  },
+  "keyUsage": [
+    false,
+    true,
+    true
+  ],
+  "name": "Clint",
+  "nonCriticalExtensionOIDs": [
+    "Fusce",
+    "dui",
+    "dictum"
+  ],
+  "notAfter": "2025-08-01",
+  "notBefore": "2025-06-11",
+  "publicKey": {
+    "algorithm": "pulvinar",
+    "modulus": 6,
+    "params": 98,
+    "publicKey": "lectus"
+  },
+  "serialNumber": 26,
+  "serialNumberObject": {
+    "serialNumber": 32
+  },
+  "sigAlgName": "arcu",
+  "sigAlgOID": "tincidunt",
+  "subjectAlternativeNames": [
+    {
+      "name": "Casey",
+      "type": 29
+    }
+  ],
+  "subjectDN": {
+    "commonName": "In",
+    "name": "Chung"
+  },
+  "subjectX500Principal": {
+    "name": "Amiee"
+  },
+  "type": "consectetur",
+  "version": 32
+}

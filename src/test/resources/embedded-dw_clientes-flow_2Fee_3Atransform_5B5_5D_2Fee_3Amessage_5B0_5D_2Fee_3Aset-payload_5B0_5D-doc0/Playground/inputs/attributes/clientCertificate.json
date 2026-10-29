@@ -1,0 +1,75 @@
+{
+  "basicConstraints": 71,
+  "criticalExtensionOIDs": [
+    "ipsum",
+    "Nunc"
+  ],
+  "extendedKeyUsage": [
+    "convallis",
+    "elit",
+    "dui"
+  ],
+  "extensions": [
+    {
+      "criticality": false,
+      "oid": "libero"
+    }
+  ],
+  "issuerAlternativeNames": [
+    {
+      "name": "Claud",
+      "type": 99
+    }
+  ],
+  "issuerDN": {
+    "commonName": "vitae",
+    "name": "Clifford"
+  },
+  "issuerUniqueID": [
+    false,
+    false
+  ],
+  "issuerX500Principal": {
+    "name": "Chong"
+  },
+  "keyUsage": [
+    false,
+    true,
+    false
+  ],
+  "name": "Aleta",
+  "nonCriticalExtensionOIDs": [
+    "elit",
+    "venenatis",
+    "sodales"
+  ],
+  "notAfter": "2024-11-17",
+  "notBefore": "2023-01-09",
+  "publicKey": {
+    "algorithm": "Fusce",
+    "modulus": 79,
+    "params": 36,
+    "publicKey": "mi"
+  },
+  "serialNumber": 38,
+  "serialNumberObject": {
+    "serialNumber": 7
+  },
+  "sigAlgName": "sodales",
+  "sigAlgOID": "eget",
+  "subjectAlternativeNames": [
+    {
+      "name": "Aleshia",
+      "type": 65
+    }
+  ],
+  "subjectDN": {
+    "commonName": "convallis",
+    "name": "Cornelius"
+  },
+  "subjectX500Principal": {
+    "name": "Alonso"
+  },
+  "type": "semper",
+  "version": 11
+}

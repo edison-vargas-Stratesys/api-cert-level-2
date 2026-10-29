@@ -1,0 +1,74 @@
+{
+  "basicConstraints": 4,
+  "criticalExtensionOIDs": [
+    "Pellentesque",
+    "erat",
+    "dolor"
+  ],
+  "extendedKeyUsage": [
+    "nibh",
+    "adipiscing"
+  ],
+  "extensions": [
+    {
+      "criticality": false,
+      "oid": "ipsum"
+    }
+  ],
+  "issuerAlternativeNames": [
+    {
+      "name": "Allen",
+      "type": 25
+    }
+  ],
+  "issuerDN": {
+    "commonName": "at",
+    "name": "Damion"
+  },
+  "issuerUniqueID": [
+    true,
+    false
+  ],
+  "issuerX500Principal": {
+    "name": "Corey"
+  },
+  "keyUsage": [
+    true,
+    false,
+    false
+  ],
+  "name": "Damien",
+  "nonCriticalExtensionOIDs": [
+    "faucibus",
+    "tincidunt"
+  ],
+  "notAfter": "2025-01-16",
+  "notBefore": "2026-06-13",
+  "publicKey": {
+    "algorithm": "felis",
+    "modulus": 49,
+    "params": 24,
+    "publicKey": "aliquam"
+  },
+  "serialNumber": 27,
+  "serialNumberObject": {
+    "serialNumber": 85
+  },
+  "sigAlgName": "ac",
+  "sigAlgOID": "Lorem",
+  "subjectAlternativeNames": [
+    {
+      "name": "Colton",
+      "type": 1
+    }
+  ],
+  "subjectDN": {
+    "commonName": "risus",
+    "name": "Alexia"
+  },
+  "subjectX500Principal": {
+    "name": "Adella"
+  },
+  "type": "risus",
+  "version": 23
+}

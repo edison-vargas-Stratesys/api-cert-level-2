@@ -1,0 +1,75 @@
+{
+  "basicConstraints": 27,
+  "criticalExtensionOIDs": [
+    "erat",
+    "sodales",
+    "dolor"
+  ],
+  "extendedKeyUsage": [
+    "risus",
+    "a"
+  ],
+  "extensions": [
+    {
+      "criticality": true,
+      "oid": "ut"
+    }
+  ],
+  "issuerAlternativeNames": [
+    {
+      "name": "Ammie",
+      "type": 56
+    }
+  ],
+  "issuerDN": {
+    "commonName": "ac",
+    "name": "Carey"
+  },
+  "issuerUniqueID": [
+    false,
+    true,
+    false
+  ],
+  "issuerX500Principal": {
+    "name": "Ana"
+  },
+  "keyUsage": [
+    true,
+    true,
+    false
+  ],
+  "name": "Buford",
+  "nonCriticalExtensionOIDs": [
+    "tempor",
+    "semper"
+  ],
+  "notAfter": "2026-07-14",
+  "notBefore": "2025-10-20",
+  "publicKey": {
+    "algorithm": "mi",
+    "modulus": 50,
+    "params": 28,
+    "publicKey": "at"
+  },
+  "serialNumber": 72,
+  "serialNumberObject": {
+    "serialNumber": 16
+  },
+  "sigAlgName": "molestie",
+  "sigAlgOID": "nunc",
+  "subjectAlternativeNames": [
+    {
+      "name": "Alyssa",
+      "type": 90
+    }
+  ],
+  "subjectDN": {
+    "commonName": "molestie",
+    "name": "Alla"
+  },
+  "subjectX500Principal": {
+    "name": "Abram"
+  },
+  "type": "a",
+  "version": 50
+}

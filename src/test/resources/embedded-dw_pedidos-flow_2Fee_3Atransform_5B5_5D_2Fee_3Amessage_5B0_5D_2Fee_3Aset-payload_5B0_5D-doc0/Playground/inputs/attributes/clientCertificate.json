@@ -1,0 +1,75 @@
+{
+  "basicConstraints": 60,
+  "criticalExtensionOIDs": [
+    "mi",
+    "Nunc"
+  ],
+  "extendedKeyUsage": [
+    "sed",
+    "dolor",
+    "Nunc"
+  ],
+  "extensions": [
+    {
+      "criticality": false,
+      "oid": "risus"
+    }
+  ],
+  "issuerAlternativeNames": [
+    {
+      "name": "Claud",
+      "type": 1
+    }
+  ],
+  "issuerDN": {
+    "commonName": "sodales",
+    "name": "Chet"
+  },
+  "issuerUniqueID": [
+    true,
+    false
+  ],
+  "issuerX500Principal": {
+    "name": "Chadwick"
+  },
+  "keyUsage": [
+    false,
+    false,
+    true
+  ],
+  "name": "Alisia",
+  "nonCriticalExtensionOIDs": [
+    "consectetur",
+    "molestie",
+    "Aliquam"
+  ],
+  "notAfter": "2025-11-06",
+  "notBefore": "2025-09-09",
+  "publicKey": {
+    "algorithm": "convallis",
+    "modulus": 22,
+    "params": 50,
+    "publicKey": "lectus"
+  },
+  "serialNumber": 75,
+  "serialNumberObject": {
+    "serialNumber": 56
+  },
+  "sigAlgName": "dolor",
+  "sigAlgOID": "tincidunt",
+  "subjectAlternativeNames": [
+    {
+      "name": "Amira",
+      "type": 92
+    }
+  ],
+  "subjectDN": {
+    "commonName": "justo",
+    "name": "Ami"
+  },
+  "subjectX500Principal": {
+    "name": "Damien"
+  },
+  "type": "at",
+  "version": 26
+}
