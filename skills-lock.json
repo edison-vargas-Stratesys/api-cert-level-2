@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "build-mule-integration": {
+      "source": "mulesoft/mulesoft-dx",
+      "sourceType": "github",
+      "skillPath": "skills/mule-development/build-mule-integration/SKILL.md",
+      "computedHash": "2c9018258c06c4a7c001487e8e52fbaef1bbce60ed827aaafc56cb6d5b133a71"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:http="http://www.mulesoft.org/schema/mule/http"
+      xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+      xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+      xsi:schemaLocation="
+        http://www.mulesoft.org/schema/mule/core
+          http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/http
+          http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+        http://www.mulesoft.org/schema/mule/ee/core
+          http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+
+    <flow name="pedidos-flow">
+
+        <!-- 1. Listener HTTP independiente — sin APIKit, sin RAML -->
+        <http:listener
+            config-ref="api-cert-level-2-httpListenerConfig"
+            path="/salesforce/sys/v1/pedidos"
+            allowedMethods="POST" />
+
+        <!-- 2. Log XML entrante -->
+        <logger
+            level="INFO"
+            doc:name="Log XML payload"
+            message="#[payload]" />
+
+        <!-- 3. Transform Message vacío (placeholder para lógica futura) -->
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+var idoc = payload.ZZORDR05.IDOC
+---
+{
+    EffectiveDate: 
+        (idoc.E1EDK02.DATUM as Date {format: "yyyyMMdd"})
+            as String {format: "dd-MM-yyyy"},
+    Type: idoc.E1EDK01.BSART,
+    Status: idoc.E1EDK01.ZSD_STS,
+    IdSAP__c: idoc.E1EDK01.BELNR,
+    SalesOrg__c: idoc.E1EDK14.ORGID,
+    DistributionChannel__c: idoc.E1EDK14.ZSD_HDT.VTWEG,
+    Sector__c: idoc.E1EDK14.ZSD_HDT.SPART,
+    Incoterms__c: idoc.E1EDK17.LKOND,
+    Society__c: idoc.E1EDK14.ZSD_HDT.BUKRS_VF,
+    GlobalStatusDelivery__c: idoc.E1EDK01.ZSD_STS.LFGSK,
+    DeliveryStatus__c: idoc.E1EDK14.ZSD_HDT.BSARK,
+    RefuseStatus__c: idoc.E1EDK01.ZSD_STS.ABSTK
+}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+
+        <!-- 4. Log JSON final -->
+        <logger
+            level="INFO"
+            doc:name="Log JSON payload"
+            message='#[%dw 2.0
+output application/json
+---
+payload]' />
+
+    </flow>
+
+</mule>

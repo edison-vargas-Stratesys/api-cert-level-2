@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:http="http://www.mulesoft.org/schema/mule/http"
+      xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+      xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+      xsi:schemaLocation="
+        http://www.mulesoft.org/schema/mule/core
+          http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/http
+          http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+        http://www.mulesoft.org/schema/mule/ee/core
+          http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+
+    <flow name="clientes-flow">
+
+        <!-- 1. Listener SOAP — sin APIKit, sin RAML -->
+        <http:listener
+            config-ref="api-cert-level-2-httpListenerConfig"
+            path="/soap/BusinessPartnerService/SuiteReplicateRequest"
+            allowedMethods="POST" />
+
+        <!-- 2. Log XML entrante sin saltos de línea -->
+        <logger
+            level="INFO"
+            doc:name="Log XML payload"
+            message="#[payload]" />
+
+        <!-- 3. Transform Message vacío (placeholder) -->
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+ns soapenv http://schemas.xmlsoap.org/soap/envelope/
+ns n0 http://sap.com/xi/SAPGlobal20/Global
+ns n1 http://sap.com/Basis/CustomFields/Generated/*
+
+// Valor de un GenericCustomField por atributo name
+fun cf(bp, fieldName) =
+    (bp.*n1#GenericCustomField filter ($.@name == fieldName))[0] as String default null
+
+// TaxGroupCode de una clasificación fiscal por TaxTypeCode
+fun taxGrp(cust, taxType) =
+    (cust.*TaxClassification filter ($.TaxTypeCode == taxType))[0].TaxGroupCode
+---
+payload.soapenv#Envelope.soapenv#Body.n0#BusinessPartnerSUITEBulkReplicateRequest.*BusinessPartnerSUITEReplicateRequestMessage map (msg) -> do {
+    var bp      = msg.BusinessPartner
+    var org     = bp.Common.Organisation.Name
+    var addr    = bp.AddressInformation
+    var postal  = addr.Address.PostalAddress
+    var tels    = addr.Address.*Telephone
+    var cust    = bp.Customer
+    var acc     = cust.AccountingInformation
+    var sales   = cust.SalesArrangement
+    var taxes   = bp.*TaxNumber
+    var taxEU   = (taxes filter ($.TaxIdentificationNumberTypeCode == "0"))[0]
+    var taxNat  = (taxes filter ($.TaxIdentificationNumberTypeCode == "1"))[0]
+    ---
+    {
+        Name: ([org.FirstLineName, org.SecondLineName, org.ThirdLineName, org.FourthLineName]
+                filter (!isEmpty($))) joinBy " ",
+        AccountSource: null,
+        Industry: cust.IndustrySector.IndustrialSectorCode,
+        ParentId: null,
+        Ownership: null,
+        address: {
+            Phone: (tels filter ($.MobilePhoneNumberIndicator == "false"))[0].FormattedNumberDescription,
+            MobilePhone__c: (tels filter ($.MobilePhoneNumberIndicator == "true"))[0].FormattedNumberDescription,
+            CustomerType__c: null,
+            ShippingStreetType__c: null,
+            ShippingStreet: postal.StreetName,
+            ShippingNumber__c: postal.HouseID,
+            ShippingPostalCode: postal.StreetPostalCode,
+            ShippingCity: postal.CityName,
+            ShippingState: postal.RegionCode,
+            ShippingCountry: postal.CountryCode
+        },
+        IdSAP__c: bp.InternalID,
+        AccountGroup__c: bp.NumberRangeIntervalBusinessPartnerGroupCode,
+        PaymentWays__c: acc.PaymentMethodsCode,
+        PaymentCondition__c: acc.CashDiscountTermsCode,
+        DocumentType__c: null,
+        DocumentNumber__c: taxNat.PartyTaxID,
+        FinanceGroup__c: null,
+        BillingGroup__c: null,
+        BillingSendWay__c: null,
+        VATClass__c: taxGrp(cust, "MWST"),
+        IGICClass__c: taxGrp(cust, "ZIGI"),
+        ISPClass__c: taxGrp(cust, "ZISP"),
+        CreditLimit__c: null,
+        Incoterms__c: sales.DeliveryTerms.Incoterms.ClassificationCode,
+        CustomerSchema__c: sales.PricingProcedureDeterminationCode,
+        SalesZone__c: sales.SalesDistrictCode,
+        Language__c: addr.Address.CommunicationPreference.CorrespondenceLanguageCode,
+        Alias__c: bp.Common.AdditionalKeyWordsText,
+        Hierarchy__c: null,
+        ActivatedDate__c: null,
+        InactivatedDate__c: null,
+        InactivateReason__c: null,
+        ClientLock__c: bp.Common.BlockedIndicator as Boolean,
+        SalesOffice__c: sales.SalesOfficeCode,
+        SalesChannel__c: sales.DistributionChannelCode,
+        Society__c: acc.CompanyID,
+        SalesOrg__c: sales.SalesOrganisationID,
+        EUDocType__c: taxEU.TaxIdentificationNumberTypeCode,
+        EUDoc__c: taxEU.PartyTaxID,
+        Manager__c: null,
+        ValuedDeliveryNote__c: cf(bp, "ALB_VALORADO") match {
+            case "NO" -> false
+            case "SI" -> true
+            else -> null
+        },
+        BillingDates__c: sales.InvoiceDatesCalendarCode,
+        AdditionalBillingDates__c: sales.IncoiceListScheduleCalendarCode,
+        PRIMCustomerNotification__c: null,
+        BillingType__c: cf(bp, "TIPO_FACTURA"),
+        RecordtypeId: null,
+        ID: cust.InternalID,
+        TotalDelivery__c: sales.DeliveryTerms.SalesOrderCompleteDeliveryIndicator as Boolean,
+        CommittedCredit__c: null,
+        EDIOperationalPoint__c: null,
+        PhysioWebId__c: null,
+        PharmaWebId__c: null,
+        DIR3Codes__c: null
+    }
+}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+
+        <!-- 4. Log JSON final sin saltos de línea -->
+        <logger
+            level="INFO"
+            doc:name="Log JSON payload"
+            message='#[%dw 2.0
+output application/json
+---
+payload]' />
+
+    </flow>
+
+</mule>
